@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
 
@@ -11,10 +11,10 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - nginx_data:/data
-      - nginx_data_letsencrypt:/etc/letsencrypt
+      - ./nginx/data:/data
+      - ./nginx/letsencrypt:/etc/letsencrypt
     networks:
-      containers:
+      mired:
         ipv4_address: 172.20.0.2
       
   pihole:
@@ -29,41 +29,17 @@ services:
       TZ: 'Europe/Madrid'
       WEBPASSWORD: 'chinarro'  
     volumes:
-      - pihole:/etc/pihole/'
-      - pihole-dns:/etc/dnsmasq.d/'
+      - ./pihole/etc-pihole/:/etc/pihole/'
+      - ./pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
     networks:
-      containers:
+      mired:
         ipv4_address: 172.20.0.3
-        
-  filebrowser:
-    image: hurlenko/filebrowser
-    environment:
-      - UID=1000
-      - GID=1000
-      - TZ=Europe/Madrid
-    ports:
-      - "8200:8080"
-    volumes:
-      - ./fb-data:/data
-      - ./fb-config:/config
-    environment:
-      - FB_BASEURL=/filebrowser
-    restart: unless-stopped
-    networks:
-      containers:
-        ipv4_address: 172.20.0.4
-        
-volumes:
-  nginx_data:
-  nginx_data_letsencrypt:
-  pihole:
-  pihole-dns:
-  
+
 networks:
-  containers:
+  mired:
     ipam:
       config:
         - subnet: 172.20.0.0/16
