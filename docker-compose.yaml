@@ -11,8 +11,8 @@ services:
       - '81:81'
       - '443:443'
     volumes:
-      - ./data:/data
-      - ./letsencrypt:/etc/letsencrypt
+      - nginx_data:/data
+      - nginx_data_letsencrypt:/etc/letsencrypt
     networks:
       containers:
         ipv4_address: 172.20.0.2
@@ -29,17 +29,22 @@ services:
       TZ: 'Europe/Madrid'
       WEBPASSWORD: 'chinarro'  
     volumes:
-      - './etc-pihole/:/etc/pihole/'
-      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+      - pihole:/etc/pihole/'
+      - pihole-dns:/etc/dnsmasq.d/'
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
     networks:
       containers:
         ipv4_address: 172.20.0.3
-
+volumes:
+  nginx_data:
+  nginx_data_letsencrypt:
+  pihole:
+  pihole-dns:
+  
 networks:
   containers:
     ipam:
       config:
-        - subnet: 172.20.0.0/24
+        - subnet: 172.20.0.0/16
