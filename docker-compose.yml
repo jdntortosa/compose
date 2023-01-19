@@ -33,7 +33,10 @@ services:
       - /root/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - NET_ADMIN
-    restart: unless-stopped      
+    restart: unless-stopped
+    networks:
+      mired:
+        ipv4_address: 172.20.0.3
 
 networks:
   mired:
