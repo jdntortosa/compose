@@ -29,8 +29,8 @@ services:
       TZ: 'Europe/Madrid'
       WEBPASSWORD: 'chinarro'
     volumes:
-      - /root/docker/etc-pihole:/etc/pihole
-      - /root/docker/etc-dnsmasq.d:/etc/dnsmasq.d
+      - /root/docker/pihole/etc-pihole:/etc/pihole
+      - /root/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - NET_ADMIN
     restart: unless-stopped      
