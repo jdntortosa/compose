@@ -45,13 +45,10 @@ services:
       - /root/docker/homer/assets/:/www/assets
     ports:
       - '8092:8080'
-    environment:
-      - INIT_ASSETS=1
     restart: always
     networks:
       mired:
         ipv4_address: 172.20.0.4
-        
 networks:
   mired:
     ipam:
