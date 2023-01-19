@@ -5,7 +5,6 @@ services:
   nginx:
     container_name: nginx
     image: jc21/nginx-proxy-manager:latest
-    restart: unless-stopped
     ports:
       - '80:80'
       - '81:81'
@@ -13,6 +12,7 @@ services:
     volumes:
       - /root/docker/nginx/data:/data
       - /root/docker/nginx/letsencrypt:/etc/letsencrypt
+    restart: always
     networks:
       mired:
         ipv4_address: 172.20.0.2
@@ -33,11 +33,32 @@ services:
       - /root/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
       - NET_ADMIN
-    restart: unless-stopped
+    restart: always
     networks:
       mired:
         ipv4_address: 172.20.0.3
-
+ diun:
+    image: crazymax/diun:latest
+    container_name: diun
+    command: serve
+    volumes:
+      - /root/docker/diun/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - 'TZ=Europe/Madrid'
+      - 'LOG_LEVEL=info'
+      - 'LOG_JSON=false'
+      - 'DIUN_WATCH_WORKERS=20'
+      - 'DIUN_WATCH_SCHEDULE=0 */6 * * *'
+      - 'DIUN_WATCH_JITTER=30s'
+      - 'DIUN_PROVIDERS_DOCKER=true'
+    labels:
+      - "diun.enable=true"
+    restart: always
+    networks:
+      mired:
+        ipv4_address: 172.20.0.4
+        
 networks:
   mired:
     ipam:
