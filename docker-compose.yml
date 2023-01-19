@@ -46,9 +46,7 @@ services:
     ports:
       - '8092:8080'
     restart: always
-    networks:
-      mired:
-        ipv4_address: 172.20.0.4
+
 networks:
   mired:
     ipam:
