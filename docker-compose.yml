@@ -24,15 +24,15 @@ services:
       - '53:53/tcp'
       - '53:53/udp'
       - '67:67/udp'
-      - '80:80/tcp'
+      - '8100:80/tcp'
     environment:
-      TZ: 'America/Chicago'
-      WEBPASSWORD: 'Europe/Madrid'
+      TZ: 'Europe/Madrid'
+      WEBPASSWORD: 'chinarro'
     volumes:
       - /root/docker/etc-pihole:/etc/pihole
       - /root/docker/etc-dnsmasq.d:/etc/dnsmasq.d
     cap_add:
-      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+      - NET_ADMIN
     restart: unless-stopped      
 
 networks:
