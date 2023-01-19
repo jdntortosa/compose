@@ -37,27 +37,6 @@ services:
     networks:
       mired:
         ipv4_address: 172.20.0.3
- diun:
-    image: crazymax/diun:latest
-    container_name: diun
-    command: serve
-    volumes:
-      - /root/docker/diun/data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - 'TZ=Europe/Madrid'
-      - 'LOG_LEVEL=info'
-      - 'LOG_JSON=false'
-      - 'DIUN_WATCH_WORKERS=20'
-      - 'DIUN_WATCH_SCHEDULE=0 */6 * * *'
-      - 'DIUN_WATCH_JITTER=30s'
-      - 'DIUN_PROVIDERS_DOCKER=true'
-    labels:
-      - "diun.enable=true"
-    restart: always
-    networks:
-      mired:
-        ipv4_address: 172.20.0.4
         
 networks:
   mired:
