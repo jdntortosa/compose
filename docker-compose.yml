@@ -42,11 +42,14 @@ services:
     image: b4bz/homer
     container_name: homer
     volumes:
-      - /root/docker/homer/assets/:/www/assets
+      - ./homer/assets/:/www/assets
     ports:
       - '8092:8080'
     restart: always
-
+    networks:
+      mired:
+        ipv4_address: 172.20.0.4
+        
 networks:
   mired:
     ipam:
