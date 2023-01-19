@@ -43,6 +43,7 @@ services:
     container_name: homer
     volumes:
       - ./homer/assets/:/www/assets
+    user: 0:0
     ports:
       - '8092:8080'
     restart: always
