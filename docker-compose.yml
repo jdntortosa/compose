@@ -24,7 +24,7 @@ services:
       - '53:53/tcp'
       - '53:53/udp'
       - '67:67/udp'
-      - '8180:80/tcp
+      - '8100:80/tcp
     environment:
       TZ: 'Europe/Madrid'
       WEBPASSWORD: 'chinarro'  
