@@ -51,22 +51,6 @@ services:
       mired:
         ipv4_address: 172.20.0.4
         
-  tailscale:
-      privileged: true
-      hostname: tailscale                                      
-      container_name: tailscale
-      image: tailscale/tailscale:latest
-      volumes:
-          - /root/docker/tailscale/var_lib:/var/lib"        
-          - /dev/net/tun:/dev/net/tun                     
-      cap_add:                                              
-        - net_admin
-        - sys_module
-      command: tailscaled
-      restart: always
-      networks:
-        mired:
-          ipv4_address: 172.20.0.5
 networks:
   mired:
     ipam:
