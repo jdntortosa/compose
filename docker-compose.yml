@@ -53,8 +53,7 @@ services:
         
   tailscale:
       privileged: true
-      hostname: tailscale                                          # This will become the tailscale device name
-      network_mode: "host"
+      hostname: tailscale                                      
       container_name: tailscale
       image: tailscale/tailscale:latest
       volumes:
@@ -67,7 +66,7 @@ services:
       restart: always
       networks:
         mired:
-
+          ipv4_address: 172.20.0.5
 networks:
   mired:
     ipam:
