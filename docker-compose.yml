@@ -67,7 +67,7 @@ services:
       restart: always
       networks:
         mired:
-          ipv4_address: 172.20.0.5
+          ipv4_address: 172.20.0.15
 
 networks:
   mired:
